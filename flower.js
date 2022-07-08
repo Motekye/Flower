@@ -24,10 +24,10 @@ FLOWER = {
 	/*
 	 *	Banner configuration...
 	*/
-	frames: 15,		// total frames to compile
-	rate: 60,		// ms between each frame
-	img64: [],		// each base64 image
-	rule64: null,	// base64 rule image
+	frames: 15,     // total frames to compile
+	rate: 60,       // ms between each frame
+	img64: [],      // each base64 image
+	rule64: null,   // base64 rule image
 
 					// callback when flower is ready	
 	ready: function(){ },
@@ -36,22 +36,22 @@ FLOWER = {
 	/*
 	 *	Banner environment...
 	*/
-	busy: true,		// busy performing animation?
-	width: 0,		// width of banner
-	height: 0,		// height of banner
-	handle: null,	// container #flower element
-	img: null,		// static image when not animating
-	can: [],		// stack of canvases
-	ctx: [],		// stack of contexts
-	imgdata: [],	// each image's imageData
-	ruledata: null,	// rule's integer array
-	rw: 0,			// width of rule
-	rh: 0,			// height of rule
-	wkimg: null,	// working <img> element
-	wkcan: null,	// working <canvas> element
-	wkctx: null,	// working context2d
-	i: 0,			// currently selected image
-	f: 0,			// current frame
+	busy: true,     // busy performing animation?
+	width: 0,       // width of banner
+	height: 0,      // height of banner
+	handle: null,   // container #flower element
+	img: null,      // static image when not animating
+	can: [],        // stack of canvases
+	ctx: [],        // stack of contexts
+	imgdata: [],    // each image's imageData
+	ruledata: null, // rule's integer array
+	rw: 0,          // width of rule
+	rh: 0,          // height of rule
+	wkimg: null,    // working <img> element
+	wkcan: null,    // working <canvas> element
+	wkctx: null,    // working context2d
+	i: 0,           // currently selected image
+	f: 0,           // current frame
 
 
 	/*
