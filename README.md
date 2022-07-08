@@ -2,6 +2,12 @@
 
 This banner allows you to transition between images using a rule image for the wipe animation.
 
+I have provided a sample rule image in this package:
+
+![IMAGE](https://github.com/Motekye/Flower/blob/main/fol.png?raw=true)
+
+This will tile a flower of life pattern as the wipe animation. Use any tiling image you want. It doesn't need to be greyscale, but will be interpereted as greyscale for the purposes of the wipe animation. So Making the image greyscale will give you a better indication of how the wipe will look.
+
 ### Step One: Provide Base64 images
 
 Provide any number of images to switch between and one image for the rule.
@@ -62,3 +68,11 @@ This step is optional. You can define a function which gets called after the ani
       }
     </script>
 
+## Fine Tuning
+
+FLOWER has a few properties you can change to alter aspects of the animation. These are their default values...
+
+    FLOWER.frames = 15;   // total number of frames
+    FLOWER.rate = 60;     // ms between each frame
+
+Multiply these two numbers to get the total milliseconds of the animation.
