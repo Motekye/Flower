@@ -67,13 +67,13 @@ FLOWER = {
 		// working image:
 		FLOWER.wkimg = document.createElement('img');
 		FLOWER.wkimg.style.position = 'fixed';
-		FLOWER.wkimg.style.top = '-'+FLOWER.height+'px';
+		FLOWER.wkimg.style.bottom = '110%';
 		document.body.appendChild(FLOWER.wkimg);
 		
 		// working canvas and context:
 		FLOWER.wkcan = document.createElement('canvas');
 		FLOWER.wkcan.style.position = 'fixed';
-		FLOWER.wkcan.style.top = '-'+FLOWER.height+'px';
+		FLOWER.wkimg.style.bottom = '110%';
 		FLOWER.wkctx = FLOWER.wkcan.getContext('2d');
 		document.body.appendChild(FLOWER.wkcan);
 		
