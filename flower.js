@@ -28,8 +28,13 @@ FLOWER = {
 	rate: 60,       // ms between each frame
 	img64: [],      // each base64 image
 	rule64: null,   // base64 rule image
+	id: 'flower',	// id of container element
+	imgscr: '',		// script url for base64 images
+	
+	imgalt: 'Still image for animated banner',
+	canalt: 'Canvas layer for animated banner',
 
-					// callback when flower is ready	
+	onload: function(){ },
 	ready: function(){ },
 	
 	
@@ -55,11 +60,57 @@ FLOWER = {
 
 
 	/*
+	 *	Configure the animated banner.
+	*/
+	config: function(o){
+		if(o.id){ FLOWER.id = o.id; }
+		if(o.src){ FLOWER.imgscr = o.src; }
+		if(o.fr){ FLOWER.frames = o.fr; }
+		if(o.frames){ FLOWER.frames = o.frames; }
+		if(o.ms){ FLOWER.rate = o.ms; }
+		if(o.rate){ FLOWER.rate = o.rate; }
+		if(o.img64){ FLOWER.img64 = o.img64; }
+		if(o.rule64){ FLOWER.rule64 = o.rule64; }
+		if(o.imgalt){ FLOWER.imgalt = o.imgalt; }
+		if(o.canalt){ FLOWER.canalt = o.canalt; }
+		if(o.onload){ FLOWER.onload = o.onload; }
+		if(o.ready){ FLOWER.ready = o.ready; }
+	},
+
+
+	/*
+	 *	Create set of links to trigger animation.
+	*/
+	links: function(p){
+		var i, l, a, u = document.createElement('ul');
+		for(i=0; i<FLOWER.img64.length; i++){
+			l = document.createElement('li');
+			u.appendChild(l);
+			a = document.createElement('a');
+			a.onclick = Function('FLOWER.to('+i+');');
+			l.appendChild(a);
+		}
+		return u;
+	},
+
+
+	/*
 	 *	Execute on page load to setup the environment.
 	*/
 	loadfn: (addEventListener("load", function(){
-		
-		FLOWER.handle = document.getElementById('flower');
+		var s = document.createElement('script');
+		s.setAttribute('src',FLOWER.imgscr);
+		s.setAttribute('onload','FLOWER.prep();');
+		document.head.appendChild(s);
+	})),
+	
+	
+	/*
+	 *	Build the flower banner layers and working images,
+	 *	begin to process the base64 images one at a time.
+	*/
+	prep: function(){
+		FLOWER.handle = document.getElementById(FLOWER.id);
 		FLOWER.width = FLOWER.handle.clientWidth;
 		FLOWER.height = FLOWER.handle.clientHeight;
 		FLOWER.handle.style.overflow = 'hidden';
@@ -82,6 +133,8 @@ FLOWER = {
 		FLOWER.img.style.width = '100%';
 		FLOWER.img.style.height = '100%';
 		FLOWER.img.style.display = 'block';
+		FLOWER.img.setAttribute('alt',FLOWER.imgalt);
+		FLOWER.img.setAttribute('aria-hidden','true');
 		FLOWER.handle.appendChild(FLOWER.img);
 		
 		// create canvases for animation:
@@ -94,6 +147,8 @@ FLOWER = {
 			FLOWER.can[i].style.display = 'block';
 			FLOWER.can[i].style.position = 'relative';
 			FLOWER.can[i].style.top = '-'+(i+1)+'00%';
+			FLOWER.can[i].innerHTML = FLOWER.canalt;
+			FLOWER.can[i].setAttribute('aria-hidden','true');
 			FLOWER.ctx[i] = FLOWER.can[i].getContext('2d');
 			FLOWER.handle.appendChild(FLOWER.can[i]);
 		}
@@ -104,8 +159,7 @@ FLOWER = {
 		// begin to process rule...
 		FLOWER.wkimg.src = FLOWER.rule64;
 		FLOWER.wkimg.setAttribute('onload','FLOWER.procRule();');
-	
-	})),
+	},
 	
 	
 	/*
@@ -162,6 +216,7 @@ FLOWER = {
 			FLOWER.wkcan.remove();
 			FLOWER.i = 0;
 			FLOWER.build();
+			FLOWER.onload();
 		}
 	
 	},
